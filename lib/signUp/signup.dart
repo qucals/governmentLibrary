@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:government_library/components/ltextbutton.dart';
 
-import 'package:government_library/components/library_textfield.dart';
+import 'package:government_library/components/ltextfield.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -35,8 +36,22 @@ class _SignUpPage extends State<SignUpPage> {
               hintText: 'Пароль',
             ),
           ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 32, right: 32, top: 12, bottom: 16),
+            child: LibraryTextButton(
+              onPressed: SignUp,
+              backgroundColor: Colors.blue[400],
+              borderRadius: 10,
+              hintText: 'Войти',
+            ),
+          )
         ],
       ),
     );
   }
+}
+
+void SignUp() {
+  print('Clicked');
 }
