@@ -15,23 +15,30 @@
  */
 
 import 'package:flutter/material.dart';
-import 'signUp/signup.dart';
+import 'package:provider/provider.dart';
+import 'package:loggy/loggy.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:government_library/src/theming/theme_manager.dart';
+
+void main(List<String> args) {
+  Loggy.initLoggy(
+    logPrinter: const PrettyPrinter(),
+  );
+
+  return runApp(ChangeNotifierProvider<ThemeNotifier>(
+    create: (_) => ThemeNotifier(),
+    child: LibraryApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+class LibraryApp extends StatelessWidget with UiLoggy {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Consumer<ThemeNotifier>(
+      builder: (context, theme, _) => MaterialApp(
+        theme: theme.getTheme(),
+        home: Scaffold(),
       ),
-      home: const SignUpPage(),
     );
   }
 }
