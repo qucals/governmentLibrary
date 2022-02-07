@@ -19,6 +19,7 @@ import 'package:provider/provider.dart';
 import 'package:loggy/loggy.dart';
 
 import 'package:government_library/src/theming/theme_manager.dart';
+import 'package:government_library/src/welcome_page/welcome_page.dart';
 
 void main(List<String> args) {
   Loggy.initLoggy(
@@ -27,17 +28,21 @@ void main(List<String> args) {
 
   return runApp(ChangeNotifierProvider<ThemeNotifier>(
     create: (_) => ThemeNotifier(),
-    child: LibraryApp(),
+    child: const LibraryApp(),
+    
   ));
 }
 
 class LibraryApp extends StatelessWidget with UiLoggy {
+  const LibraryApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeNotifier>(
       builder: (context, theme, _) => MaterialApp(
         theme: theme.getTheme(),
-        home: Scaffold(),
+        home: LibraryWelcomePage(themeNotifier: theme),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

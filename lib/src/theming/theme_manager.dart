@@ -27,12 +27,39 @@ class ThemeNotifier with ChangeNotifier, UiLoggy {
     backgroundColor: const Color(0xFFE5E5E5),
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
         .copyWith(secondary: Colors.black),
+
+    fontFamily: 'LGothamPro',
+
+    textTheme: const TextTheme(
+      headline1: TextStyle(
+        color: Colors.white,
+        fontSize: 72,
+        fontWeight: FontWeight.bold,
+      ),
+      button: TextStyle(
+        color: Colors.white,
+        fontSize: 18,
+        height: 1.2,
+      ),
+      // button: TextStyle(color: Colors.white),
+    ),
   );
 
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Colors.black,
     backgroundColor: const Color(0xFF212121),
+
+    fontFamily: 'LGothamPro',
+
+    textTheme: const TextTheme(
+      headline1: TextStyle(
+        color: Colors.black,
+        fontSize: 72,
+        fontWeight: FontWeight.bold,
+      ),
+      // button: TextStyle(color: Colors.white),
+    ),
   );
 
   late ThemeData _themeData;
@@ -67,4 +94,6 @@ class ThemeNotifier with ChangeNotifier, UiLoggy {
     StorageManager.saveData('themeMode', 'light');
     notifyListeners();
   }
+
+  String getThemeMode() => getTheme() == lightTheme ? 'light' : 'dark';
 }
