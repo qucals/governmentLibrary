@@ -15,6 +15,8 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:government_library/src/sign_in_page/sing_in_page.dart';
+import 'package:government_library/src/sign_up_page/sign_up_page.dart';
 import 'package:loggy/loggy.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -45,8 +47,6 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
         SvgPicture.asset(
           backgroundAssetName,
           alignment: Alignment.center,
-          // width: MediaQuery.of(context).size.width,
-          // height: MediaQuery.of(context).size.height,
           fit: BoxFit.cover,
         ),
         Column(
@@ -56,7 +56,12 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
               alignment: Alignment.center,
               padding: const EdgeInsets.fromLTRB(35, 10, 30, 70),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SignInPage(themeNotifier: widget.themeNotifier,)));
+                },
                 child: const Text(
                   'Уже есть аккаунт',
                   style: TextStyle(
@@ -71,12 +76,23 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
             Padding(
               padding: const EdgeInsets.fromLTRB(35, 30, 30, 10),
               child: LibraryPressButton(
-                  width: 350,
-                  height: 53,
-                  textButton: 'Присоединиться к Библ',
-                  icon: SvgPicture.asset(
-                    'assets/images/icons/ic_back.svg',
-                  )),
+                width: 350,
+                height: 53,
+                textButton: 'Присоединиться к Библ',
+                icon: SvgPicture.asset(
+                  'assets/images/icons/ic_next.svg',
+                ),
+                onPressed: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const SignUpPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SignInPage(themeNotifier: widget.themeNotifier,)));
+                },
+              ),
             ),
             Container(
                 alignment: Alignment.centerLeft,

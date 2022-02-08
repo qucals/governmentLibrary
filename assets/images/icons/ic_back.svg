@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title> / icon / ic_back</title>
     <defs>
         <polygon id="path-1" points="20 11 7.83 11 13.42 5.41 12 4 4 12 12 20 13.41 18.59 7.83 13 20 13"></polygon>
     </defs>
     <g id="Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Заставка" transform="translate(-316.000000, -719.000000)">
-            <g id="Кнопки-(1)" transform="translate(37.000000, 700.000000)">
-                <g id="Group" transform="translate(275.000000, 15.000000)">
-                    <g id="ic_back" transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) ">
-                        <rect id="container" x="0" y="0" width="24" height="24"></rect>
-                        <mask id="mask-2" fill="white">
-                            <use xlink:href="#path-1"></use>
-                        </mask>
-                        <use id="shape" fill="#000000" fill-rule="nonzero" opacity="0" xlink:href="#path-1"></use>
-                        <polygon id="color" fill="#1C1B1F" mask="url(#mask-2)" points="0 24 24 24 24 0 0 0"></polygon>
-                    </g>
-                </g>
+        <g id="Вход" transform="translate(-35.000000, -50.000000)">
+            <g id="ic_back" transform="translate(35.000000, 50.000000)">
+                <rect id="container" x="0" y="0" width="24" height="24"></rect>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="shape" fill="#000000" fill-rule="nonzero" opacity="0" xlink:href="#path-1"></use>
+                <polygon id="color" fill="#000000" mask="url(#mask-2)" points="0 24 24 24 24 0 0 0"></polygon>
             </g>
         </g>
     </g>

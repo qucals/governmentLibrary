@@ -20,16 +20,30 @@ import 'package:flutter_svg/svg.dart';
 class LibraryPressButton extends StatelessWidget {
   final double width;
   final double height;
+  final double borderRadius;
+
   final String textButton;
+  final Function onPressed;
+
+  final TextStyle textStyle;
+  static const TextStyle _defaultTextStyle = TextStyle(
+    color: Colors.black,
+    fontFamily: 'LGothamPro',
+    fontWeight: FontWeight.w700,
+  );
+
   final SvgPicture icon;
 
-  const LibraryPressButton({
-    Key? key,
-    required this.width,
-    required this.height,
-    required this.textButton,
-    required this.icon,
-  }) : super(key: key);
+  const LibraryPressButton(
+      {Key? key,
+      required this.width,
+      required this.height,
+      required this.textButton,
+      required this.icon,
+      required this.onPressed,
+      this.borderRadius = 15.0,
+      this.textStyle = _defaultTextStyle})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,30 +51,23 @@ class LibraryPressButton extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          onPressed();
+         },
         child: Row(
           children: <Widget>[
-            Text(textButton,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'LGothamPro',
-                  fontWeight: FontWeight.w700
-                )
-            ),
+            Text(textButton, style: textStyle),
             const Spacer(flex: 1),
             icon
           ],
         ),
         style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.resolveWith<Color?>((states) => Theme.of(context).primaryColor),
-          shape:
-              MaterialStateProperty.all<RoundedRectangleBorder>(
+            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (states) => Theme.of(context).primaryColor),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                )
-              )
-        ),
+              borderRadius: BorderRadius.circular(borderRadius),
+            ))),
       ),
     );
   }
