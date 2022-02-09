@@ -16,73 +16,199 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:government_library/src/components/press_button.dart';
+import 'package:government_library/src/components/text_button.dart';
+import 'package:government_library/src/components/text_field.dart';
 import 'package:government_library/src/theming/theme_manager.dart';
 
 // ignore: must_be_immutable
-class SignInPage extends StatefulWidget {
+class LibrarySignInPage extends StatefulWidget {
   ThemeNotifier themeNotifier;
 
-  SignInPage({
+  LibrarySignInPage({
     Key? key,
     required this.themeNotifier,
   }) : super(key: key);
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<LibrarySignInPage> createState() => _LibrarySignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _LibrarySignInPageState extends State<LibrarySignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(width: 300, height: 50),
-            Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.all(30),
-                child: GestureDetector(
-                  onTap: () { Navigator.pop(context); },
-                  child: SvgPicture.asset('assets/images/icons/ic_back.svg',
+        body: Center(
+      child: Column(
+        children: <Widget>[
+          const SizedBox(width: 300, height: 50),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.all(30),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: SvgPicture.asset(
+                'assets/images/icons/ic_back.svg',
+              ),
+            ),
+          ),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
+            child: Text(
+              'Вход',
+              style: widget.themeNotifier.getTheme().textTheme.headline2,
+            ),
+          ),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.fromLTRB(35, 0, 30, 35),
+            child: Text(
+              'Введите ваши данные для погружения в книжных космос',
+              style: widget.themeNotifier.getTheme().textTheme.subtitle1,
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.fromLTRB(30, 15, 30, 20),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 12),
+                  child: Text(
+                    'Логин',
+                    style: widget.themeNotifier.getTheme().textTheme.headline6,
+                  ),
                 ),
-              ),
+                Container(
+                  alignment: Alignment.center,
+                  child: LibraryTextField(
+                    hintText: 'Введите логин',
+                    labelStyle:
+                        widget.themeNotifier.getTheme().textTheme.overline!,
+                  ),
+                ),
+              ],
             ),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: const EdgeInsets.all(30),
+          ),
+          Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 12),
+                  child: Text(
+                    'Пароль',
+                    style: widget.themeNotifier.getTheme().textTheme.headline6,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: LibraryTextField(
+                    hintText: 'Введите пароль',
+                    labelStyle:
+                        widget.themeNotifier.getTheme().textTheme.overline!,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+            child: LibraryPressButton(
+              width: 350,
+              height: 60,
+              textButton: 'Войти',
+              icon: SvgPicture.asset(
+                'assets/images/icons/ic_next.svg',
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
+            child: GestureDetector(
+              onTap: () {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => LibrarySignInPage(
+                //               themeNotifier: widget.themeNotifier,
+                //             )));
+              },
               child: Text(
-                'Вход',
-                style: widget.themeNotifier.getTheme().textTheme.headline2,
-              ),
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
-              child: Text(
-                'Введите ваши данные данные для погружения в книжных космос',
-                style: widget.themeNotifier.getTheme().textTheme.subtitle1,
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                    child: Text(
-                      'Логин',
-                      style: widget.themeNotifier.getTheme().textTheme.headline6,
-                    ),
-                  )
-                ],
-              ),
+                'Забыли данные для входа?',
+                style: TextStyle(
+                  fontFamily: 'LGothamPro',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: widget.themeNotifier.getTheme().colorScheme.secondary,
+                  decoration: TextDecoration.underline,
+                ),
+              )
             )
-          ],
-        ),
-      )
-    );
+          ),
+          Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.fromLTRB(40, 0, 40, 30),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    'или войдите с помощью',
+                    style: widget.themeNotifier.getTheme().textTheme.overline,
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    LibraryTextButton(
+                      onPressed: () {}, 
+                      width: 50,
+                      height: 50,
+                      child: SvgPicture.asset(
+                        'assets/images/icons/vk_icon.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                    ),
+                    const Spacer(flex: 1),
+                    LibraryTextButton(
+                      onPressed: () {}, 
+                      width: 135,
+                      height: 50,
+                      child: SvgPicture.asset(
+                        'assets/images/icons/gosuslugi_icon.svg',
+                        width: 100,
+                        height: 15,
+                      ),
+                    ),
+                    const Spacer(flex: 1),
+                    LibraryTextButton(
+                      onPressed: () {}, 
+                      width: 50,
+                      height: 50,
+                      child: SvgPicture.asset(
+                        'assets/images/icons/google_icon.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ));
   }
 }

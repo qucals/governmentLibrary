@@ -60,7 +60,7 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SignInPage(themeNotifier: widget.themeNotifier,)));
+                          builder: (context) => LibrarySignInPage(themeNotifier: widget.themeNotifier,)));
                 },
                 child: const Text(
                   'Уже есть аккаунт',
@@ -77,8 +77,10 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
               padding: const EdgeInsets.fromLTRB(35, 30, 30, 10),
               child: LibraryPressButton(
                 width: 350,
-                height: 53,
+                height: 60,
                 textButton: 'Присоединиться к Библ',
+                textStyle: LibraryPressButton.darkTextStyle,
+                backgroundColor: widget.themeNotifier.getTheme().primaryColor,
                 icon: SvgPicture.asset(
                   'assets/images/icons/ic_next.svg',
                 ),
@@ -90,7 +92,7 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SignInPage(themeNotifier: widget.themeNotifier,)));
+                          builder: (context) => LibrarySignInPage(themeNotifier: widget.themeNotifier,)));
                 },
               ),
             ),

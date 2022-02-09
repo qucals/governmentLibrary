@@ -13,3 +13,34 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
+
+import 'package:flutter/material.dart';
+
+// ignore: must_be_immutable
+class LibraryTextField extends StatelessWidget {
+  final String hintText;
+  TextStyle labelStyle;
+
+  LibraryTextField({
+    Key? key,
+    required this.hintText,
+    required this.labelStyle,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+        autofocus: false,
+        style: labelStyle,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.fromLTRB(25, 18, 25, 18),
+          filled: true,
+          fillColor: const Color(0xFFE5E5EA),
+          hintText: hintText,
+          hintStyle: labelStyle,
+          border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(15)),
+        ));
+  }
+}

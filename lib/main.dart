@@ -15,6 +15,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:loggy/loggy.dart';
 
@@ -29,7 +30,6 @@ void main(List<String> args) {
   return runApp(ChangeNotifierProvider<ThemeNotifier>(
     create: (_) => ThemeNotifier(),
     child: const LibraryApp(),
-    
   ));
 }
 
@@ -38,6 +38,10 @@ class LibraryApp extends StatelessWidget with UiLoggy {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Consumer<ThemeNotifier>(
       builder: (context, theme, _) => MaterialApp(
         theme: theme.getTheme(),

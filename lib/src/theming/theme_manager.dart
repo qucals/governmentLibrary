@@ -57,7 +57,17 @@ class ThemeNotifier with ChangeNotifier, UiLoggy {
         fontSize: 18,
         height: 1.2,
       ),
-      // button: TextStyle(color: Colors.white),
+      overline: TextStyle(
+        color: Color(0xFF8E8E93),
+        fontSize: 16,
+        height: 1.2,
+      ),
+    ),
+
+    buttonTheme: const ButtonThemeData(
+      padding: EdgeInsets.fromLTRB(25, 18, 25, 18),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+      buttonColor: Colors.black,
     ),
   );
 

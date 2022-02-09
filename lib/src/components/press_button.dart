@@ -26,7 +26,15 @@ class LibraryPressButton extends StatelessWidget {
   final Function onPressed;
 
   final TextStyle textStyle;
-  static const TextStyle _defaultTextStyle = TextStyle(
+  final Color? backgroundColor;
+
+  static const TextStyle defaultTextStyle = TextStyle(
+    color: Colors.white,
+    fontFamily: 'LGothamPro',
+    fontWeight: FontWeight.w700,
+  );
+
+  static const TextStyle darkTextStyle = TextStyle(
     color: Colors.black,
     fontFamily: 'LGothamPro',
     fontWeight: FontWeight.w700,
@@ -42,7 +50,8 @@ class LibraryPressButton extends StatelessWidget {
       required this.icon,
       required this.onPressed,
       this.borderRadius = 15.0,
-      this.textStyle = _defaultTextStyle})
+      this.textStyle = defaultTextStyle, 
+      this.backgroundColor})
       : super(key: key);
 
   @override
@@ -53,7 +62,7 @@ class LibraryPressButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           onPressed();
-         },
+        },
         child: Row(
           children: <Widget>[
             Text(textButton, style: textStyle),
@@ -62,11 +71,13 @@ class LibraryPressButton extends StatelessWidget {
           ],
         ),
         style: ButtonStyle(
+            padding: MaterialStateProperty.all(
+                const EdgeInsets.fromLTRB(25, 18, 25, 18)),
             backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                (states) => Theme.of(context).primaryColor),
+                (states) => backgroundColor ?? Theme.of(context).colorScheme.secondary),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
+            borderRadius: BorderRadius.circular(borderRadius),
             ))),
       ),
     );

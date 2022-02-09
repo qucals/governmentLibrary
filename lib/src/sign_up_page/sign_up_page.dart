@@ -17,14 +17,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class LibrarySignUpPage extends StatefulWidget {
+  const LibrarySignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<LibrarySignUpPage> createState() => _LibrarySignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _LibrarySignUpPageState extends State<LibrarySignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
