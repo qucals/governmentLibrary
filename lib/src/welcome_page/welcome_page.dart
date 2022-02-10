@@ -16,6 +16,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:government_library/src/sign_in_page/sing_in_page.dart';
+import 'package:government_library/src/welcome_page/header_painter.dart';
 import 'package:loggy/loggy.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -45,19 +46,18 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
     double screenHeight = queryData.size.height;
 
     return Scaffold(
+      backgroundColor: widget.themeNotifier.getTheme().colorScheme.secondary,
         body: Stack(
       children: <Widget>[
-        SvgPicture.asset(
-          backgroundAssetName,
-          alignment: Alignment.center,
-          fit: BoxFit.cover,
+        CustomPaint(
+          painter: LibraryCurveHeaderPainter(themeNotifier: widget.themeNotifier),
+          child: Container(),
         ),
         Column(
           verticalDirection: VerticalDirection.up,
           children: <Widget>[
             Container(
               alignment: Alignment.center,
-              // padding: const EdgeInsets.fromLTRB(35, 10, 30, 70),
               padding: EdgeInsets.fromLTRB(32, 10, 32, screenHeight * 0.08),
               child: GestureDetector(
                 onTap: () {
