@@ -25,10 +25,12 @@ class LibraryPressButton extends StatelessWidget {
   final String textButton;
   final Function onPressed;
 
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final Color? backgroundColor;
 
-  static const TextStyle defaultTextStyle = TextStyle(
+  final SvgPicture icon;
+
+  static const TextStyle lightTextStyle = TextStyle(
     color: Colors.white,
     fontFamily: 'LGothamPro',
     fontWeight: FontWeight.w700,
@@ -40,8 +42,6 @@ class LibraryPressButton extends StatelessWidget {
     fontWeight: FontWeight.w700,
   );
 
-  final SvgPicture icon;
-
   const LibraryPressButton(
       {Key? key,
       required this.width,
@@ -50,7 +50,7 @@ class LibraryPressButton extends StatelessWidget {
       required this.icon,
       required this.onPressed,
       this.borderRadius = 15.0,
-      this.textStyle = defaultTextStyle, 
+      this.textStyle, 
       this.backgroundColor})
       : super(key: key);
 
@@ -65,7 +65,10 @@ class LibraryPressButton extends StatelessWidget {
         },
         child: Row(
           children: <Widget>[
-            Text(textButton, style: textStyle),
+            Text(
+              textButton, 
+              style: textStyle ?? (Theme.of(context).brightness == Brightness.light ? lightTextStyle : darkTextStyle),
+            ),
             const Spacer(flex: 1),
             icon
           ],
