@@ -20,6 +20,7 @@ import 'package:government_library/src/components/press_button.dart';
 import 'package:government_library/src/components/text_button.dart';
 import 'package:government_library/src/components/text_field.dart';
 import 'package:government_library/src/theming/theme_manager.dart';
+import 'package:loggy/loggy.dart';
 
 // ignore: must_be_immutable
 class LibrarySignInPage extends StatefulWidget {
@@ -34,17 +35,23 @@ class LibrarySignInPage extends StatefulWidget {
   State<LibrarySignInPage> createState() => _LibrarySignInPageState();
 }
 
-class _LibrarySignInPageState extends State<LibrarySignInPage> {
+class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
   @override
   Widget build(BuildContext context) {
+    MediaQueryData queryData = MediaQuery.of(context);
+    double screenWidth = queryData.size.width;
+    double screenHeight = queryData.size.height;
+
+    loggy.debug('Screen: width=$screenWidth, height=$screenHeight');
+
     return Scaffold(
         body: Center(
       child: Column(
         children: <Widget>[
-          const SizedBox(width: 300, height: 50),
+          SizedBox(width: screenWidth, height: screenHeight * 0.05),
           Container(
             alignment: Alignment.topLeft,
-            padding: const EdgeInsets.all(30),
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: screenHeight * 0.03),
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
@@ -56,7 +63,7 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
           ),
           Container(
             alignment: Alignment.topLeft,
-            padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: screenWidth * 0.03),
             child: Text(
               'Вход',
               style: widget.themeNotifier.getTheme().textTheme.headline2,
@@ -64,15 +71,17 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
           ),
           Container(
             alignment: Alignment.topLeft,
-            padding: const EdgeInsets.fromLTRB(35, 0, 30, 35),
+            padding: EdgeInsets.only(left: 32, right: 32, bottom: screenHeight * 0.03),
             child: Text(
               'Введите ваши данные для погружения в книжных космос',
               style: widget.themeNotifier.getTheme().textTheme.subtitle1,
             ),
           ),
+          const Spacer(flex: 1,),
           Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.fromLTRB(30, 15, 30, 20),
+            padding: EdgeInsets.fromLTRB(32, screenHeight * 0.01, 
+                                         32, screenHeight * 0.02),
             child: Column(
               children: <Widget>[
                 Container(
@@ -96,7 +105,7 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
           ),
           Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
+            padding: EdgeInsets.only(left: 32, right: 32, bottom: screenHeight * 0.03),
             child: Column(
               children: <Widget>[
                 Container(
@@ -119,9 +128,9 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+            padding: const EdgeInsets.only(left: 32, right: 32, bottom: 10),
             child: LibraryPressButton(
-              width: 350,
+              width: screenWidth,
               height: 60,
               textButton: 'Войти',
               icon: SvgPicture.asset(
@@ -132,32 +141,32 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
             ),
           ),
           Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
-            child: GestureDetector(
-              onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => LibrarySignInPage(
-                //               themeNotifier: widget.themeNotifier,
-                //             )));
-              },
-              child: Text(
-                'Забыли данные для входа?',
-                style: TextStyle(
-                  fontFamily: 'LGothamPro',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: widget.themeNotifier.getTheme().colorScheme.secondary,
-                  decoration: TextDecoration.underline,
-                ),
-              )
-            )
-          ),
+              alignment: Alignment.center,
+              padding: EdgeInsets.fromLTRB(32, 10, 32, screenHeight * 0.01),
+              child: GestureDetector(
+                  onTap: () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => LibrarySignInPage(
+                    //               themeNotifier: widget.themeNotifier,
+                    //             )));
+                  },
+                  child: Text(
+                    'Забыли данные для входа?',
+                    style: TextStyle(
+                      fontFamily: 'LGothamPro',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color:
+                          widget.themeNotifier.getTheme().colorScheme.secondary,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ))),
+          const Spacer(flex: 1,),
           Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.fromLTRB(40, 0, 40, 30),
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
             child: Column(
               children: <Widget>[
                 Container(
@@ -171,7 +180,7 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
                 Row(
                   children: <Widget>[
                     LibraryTextButton(
-                      onPressed: () {}, 
+                      onPressed: () {},
                       width: 50,
                       height: 50,
                       child: SvgPicture.asset(
@@ -182,7 +191,7 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
                     ),
                     const Spacer(flex: 1),
                     LibraryTextButton(
-                      onPressed: () {}, 
+                      onPressed: () {},
                       width: 135,
                       height: 50,
                       child: SvgPicture.asset(
@@ -193,7 +202,7 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
                     ),
                     const Spacer(flex: 1),
                     LibraryTextButton(
-                      onPressed: () {}, 
+                      onPressed: () {},
                       width: 50,
                       height: 50,
                       child: SvgPicture.asset(
@@ -206,7 +215,8 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> {
                 )
               ],
             ),
-          )
+          ),
+          const Spacer(flex: 1,),
         ],
       ),
     ));

@@ -31,37 +31,44 @@ class ThemeNotifier with ChangeNotifier, UiLoggy {
     fontFamily: 'LGothamPro',
 
     textTheme: const TextTheme(
+
       headline1: TextStyle(
         color: Colors.white,
         fontSize: 72,
         fontWeight: FontWeight.bold,
       ),
+
       headline2: TextStyle(
         color: Colors.black,
         fontSize: 36,
         fontWeight: FontWeight.bold,
       ),
+
       headline6: TextStyle(
         color: Colors.black,
         fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
+
       subtitle1: TextStyle(
         color: Color(0xFF8E8E93),
         fontSize: 18,
         fontWeight: FontWeight.normal,
         height: 1.2,
       ),
+
       button: TextStyle(
         color: Colors.white,
         fontSize: 18,
         height: 1.2,
       ),
+
       overline: TextStyle(
         color: Color(0xFF8E8E93),
         fontSize: 16,
         height: 1.2,
       ),
+
     ),
 
     buttonTheme: const ButtonThemeData(

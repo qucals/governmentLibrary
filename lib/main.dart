@@ -38,10 +38,12 @@ class LibraryApp extends StatelessWidget with UiLoggy {
 
   @override
   Widget build(BuildContext context) {
+    // Возможен только портретный режим просмотра
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     return Consumer<ThemeNotifier>(
       builder: (context, theme, _) => MaterialApp(
         theme: theme.getTheme(),

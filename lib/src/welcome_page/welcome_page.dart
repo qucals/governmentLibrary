@@ -16,7 +16,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:government_library/src/sign_in_page/sing_in_page.dart';
-import 'package:government_library/src/sign_up_page/sign_up_page.dart';
 import 'package:loggy/loggy.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -41,6 +40,10 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
     String backgroundAssetName = _backgroundAssetPreName +
         (_themeMode == 'light' ? 'header_light.svg' : 'header_dark.svg');
 
+    MediaQueryData queryData = MediaQuery.of(context);
+    double screenWidth = queryData.size.width;
+    double screenHeight = queryData.size.height;
+
     return Scaffold(
         body: Stack(
       children: <Widget>[
@@ -54,7 +57,8 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
           children: <Widget>[
             Container(
               alignment: Alignment.center,
-              padding: const EdgeInsets.fromLTRB(35, 10, 30, 70),
+              // padding: const EdgeInsets.fromLTRB(35, 10, 30, 70),
+              padding: EdgeInsets.fromLTRB(32, 10, 32, screenHeight * 0.08),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -74,7 +78,7 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(35, 30, 30, 10),
+              padding: EdgeInsets.fromLTRB(32, screenHeight * 0.05, 32, 10),
               child: LibraryPressButton(
                 width: 350,
                 height: 60,
@@ -99,21 +103,21 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
             Container(
                 alignment: Alignment.centerLeft,
                 //  padding: const EdgeInsets.all(30),
-                padding: const EdgeInsets.fromLTRB(35, 20, 30, 0),
+                padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
                 child: Text(
                   'Читайте интересное, \nузнавайте о новых мероприятиях, \nделитесь эмоциями и впечатлениями!',
                   style: widget.themeNotifier.getTheme().textTheme.button,
                 )),
             Container(
                 alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.fromLTRB(35, 20, 30, 0),
+                padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
                 child: Text(
                   'Современное решение \nдля любителей почитать!',
                   style: widget.themeNotifier.getTheme().textTheme.button,
                 )),
             Container(
               alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+              padding: const EdgeInsets.only(left: 30, right: 30),
               child: Text(
                 'Библ',
                 style: widget.themeNotifier.getTheme().textTheme.headline1,
