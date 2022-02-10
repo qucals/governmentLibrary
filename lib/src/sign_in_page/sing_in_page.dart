@@ -44,6 +44,8 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
 
     loggy.debug('Screen: width=$screenWidth, height=$screenHeight');
 
+    final FocusNode focus = FocusNode();
+
     return Scaffold(
         body: Center(
       child: Column(
@@ -51,7 +53,8 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
           SizedBox(width: screenWidth, height: screenHeight * 0.05),
           Container(
             alignment: Alignment.topLeft,
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: screenHeight * 0.03),
+            padding: EdgeInsets.symmetric(
+                horizontal: 30, vertical: screenHeight * 0.03),
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
@@ -63,7 +66,8 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
           ),
           Container(
             alignment: Alignment.topLeft,
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: screenWidth * 0.03),
+            padding: EdgeInsets.symmetric(
+                horizontal: 30, vertical: screenWidth * 0.03),
             child: Text(
               'Вход',
               style: widget.themeNotifier.getTheme().textTheme.headline2,
@@ -71,17 +75,20 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
           ),
           Container(
             alignment: Alignment.topLeft,
-            padding: EdgeInsets.only(left: 32, right: 32, bottom: screenHeight * 0.03),
+            padding: EdgeInsets.only(
+                left: 32, right: 32, bottom: screenHeight * 0.03),
             child: Text(
               'Введите ваши данные для погружения в книжных космос',
               style: widget.themeNotifier.getTheme().textTheme.subtitle1,
             ),
           ),
-          const Spacer(flex: 1,),
+          const Spacer(
+            flex: 1,
+          ),
           Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(32, screenHeight * 0.01, 
-                                         32, screenHeight * 0.02),
+            padding: EdgeInsets.fromLTRB(
+                32, screenHeight * 0.01, 32, screenHeight * 0.02),
             child: Column(
               children: <Widget>[
                 Container(
@@ -96,6 +103,10 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
                   alignment: Alignment.center,
                   child: LibraryTextField(
                     hintText: 'Введите логин',
+                    autofocus: true,
+                    onSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(focus);
+                    },
                     labelStyle:
                         widget.themeNotifier.getTheme().textTheme.overline!,
                   ),
@@ -105,7 +116,8 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
           ),
           Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.only(left: 32, right: 32, bottom: screenHeight * 0.03),
+            padding: EdgeInsets.only(
+                left: 32, right: 32, bottom: screenHeight * 0.03),
             child: Column(
               children: <Widget>[
                 Container(
@@ -120,6 +132,10 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
                   alignment: Alignment.center,
                   child: LibraryTextField(
                     hintText: 'Введите пароль',
+                    focusNode: focus,
+                    onSubmitted: (_) {
+                      FocusScope.of(context).unfocus();
+                    },
                     labelStyle:
                         widget.themeNotifier.getTheme().textTheme.overline!,
                   ),
@@ -163,7 +179,9 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
                       decoration: TextDecoration.underline,
                     ),
                   ))),
-          const Spacer(flex: 1,),
+          const Spacer(
+            flex: 1,
+          ),
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
@@ -216,7 +234,9 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
               ],
             ),
           ),
-          const Spacer(flex: 1,),
+          const Spacer(
+            flex: 1,
+          ),
         ],
       ),
     ));

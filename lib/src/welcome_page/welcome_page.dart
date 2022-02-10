@@ -15,13 +15,13 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:government_library/src/sign_in_page/sing_in_page.dart';
-import 'package:government_library/src/welcome_page/header_painter.dart';
 import 'package:loggy/loggy.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:government_library/src/components/press_button.dart';
 import 'package:government_library/src/theming/theme_manager.dart';
+import 'package:government_library/src/sign_in_page/sing_in_page.dart';
+import 'package:government_library/src/welcome_page/header_painter.dart';
 
 class LibraryWelcomePage extends StatefulWidget {
   final ThemeNotifier themeNotifier;
@@ -36,11 +36,6 @@ class LibraryWelcomePage extends StatefulWidget {
 class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
   @override
   Widget build(BuildContext context) {
-    const _backgroundAssetPreName = 'assets/images/welcome_page/';
-    String _themeMode = widget.themeNotifier.getThemeMode();
-    String backgroundAssetName = _backgroundAssetPreName +
-        (_themeMode == 'light' ? 'header_light.svg' : 'header_dark.svg');
-
     MediaQueryData queryData = MediaQuery.of(context);
     double screenWidth = queryData.size.width;
     double screenHeight = queryData.size.height;
@@ -64,7 +59,7 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LibrarySignInPage(themeNotifier: widget.themeNotifier,)));
+                        builder: (context) => LibrarySignInPage(themeNotifier: widget.themeNotifier,)));
                 },
                 child: const Text(
                   'Уже есть аккаунт',
@@ -73,6 +68,7 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
                     fontWeight: FontWeight.w400,
                     fontSize: 18,
                     color: Colors.white,
+                    decoration: TextDecoration.underline,
                   ),
                 ),
               ),
@@ -89,14 +85,11 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
                   'assets/images/icons/ic_next.svg',
                 ),
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const SignUpPage()));
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LibrarySignInPage(themeNotifier: widget.themeNotifier,)));
+                          builder: (context) => 
+                            LibrarySignInPage(themeNotifier: widget.themeNotifier,)));
                 },
               ),
             ),

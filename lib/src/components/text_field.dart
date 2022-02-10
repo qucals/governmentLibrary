@@ -18,20 +18,47 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class LibraryTextField extends StatelessWidget {
+  final TextEditingController _controller = TextEditingController();
+
+  String text = '';
+  final int maxLength;
+
   final String hintText;
   TextStyle labelStyle;
+
+  final bool autofocus;
+  final FocusNode? focusNode;
+  final Function? onSubmitted;
 
   LibraryTextField({
     Key? key,
     required this.hintText,
     required this.labelStyle,
+    this.focusNode,
+    this.onSubmitted,
+    this.autofocus = false,
+    this.maxLength = 32,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-        autofocus: false,
+        controller: _controller,
+        onChanged: (String newVal) {
+          if (newVal.length <= maxLength) {
+            text = newVal;
+          } else {
+            _controller.text = text;
+          }
+        },
+        autofocus: autofocus,
         style: labelStyle,
+        focusNode: focusNode,
+        onSubmitted: (value) {
+          if (onSubmitted != null) {
+            onSubmitted!(value);
+          }
+        },
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.fromLTRB(25, 18, 25, 18),
           filled: true,

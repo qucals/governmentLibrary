@@ -32,13 +32,11 @@ class LibraryPressButton extends StatelessWidget {
 
   static const TextStyle lightTextStyle = TextStyle(
     color: Colors.white,
-    fontFamily: 'LGothamPro',
     fontWeight: FontWeight.w700,
   );
 
   static const TextStyle darkTextStyle = TextStyle(
     color: Colors.black,
-    fontFamily: 'LGothamPro',
     fontWeight: FontWeight.w700,
   );
 
@@ -74,14 +72,16 @@ class LibraryPressButton extends StatelessWidget {
           ],
         ),
         style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-                const EdgeInsets.fromLTRB(25, 18, 25, 18)),
-            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                (states) => backgroundColor ?? Theme.of(context).colorScheme.secondary),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-            ))),
+          padding: MaterialStateProperty.all(
+              const EdgeInsets.fromLTRB(25, 18, 25, 18)),
+          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (states) => backgroundColor ?? Theme.of(context).colorScheme.secondary),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius),
+            )
+          )
+        ),
       ),
     );
   }
