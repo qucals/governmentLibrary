@@ -48,7 +48,7 @@ class LibraryPressButton extends StatelessWidget {
       required this.icon,
       required this.onPressed,
       this.borderRadius = 15.0,
-      this.textStyle, 
+      this.textStyle,
       this.backgroundColor})
       : super(key: key);
 
@@ -64,24 +64,100 @@ class LibraryPressButton extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Text(
-              textButton, 
-              style: textStyle ?? (Theme.of(context).brightness == Brightness.light ? lightTextStyle : darkTextStyle),
+              textButton,
+              style: textStyle ?? TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.w700,
+              ),
+                  // (Theme.of(context).brightness == Brightness.light
+                      // ? lightTextStyle
+                      // : darkTextStyle),
             ),
             const Spacer(flex: 1),
             icon
           ],
         ),
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(
-              const EdgeInsets.fromLTRB(25, 18, 25, 18)),
-          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (states) => backgroundColor ?? Theme.of(context).colorScheme.secondary),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
+            padding: MaterialStateProperty.all(
+                const EdgeInsets.fromLTRB(25, 18, 25, 18)),
+            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (states) =>
+                    backgroundColor ?? Theme.of(context).colorScheme.secondary),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius),
-            )
-          )
+            ))),
+      ),
+    );
+  }
+}
+
+class LibraryAnimatedPressButton extends StatelessWidget {
+  final double width;
+  final double height;
+  final double borderRadius;
+
+  final String textButton;
+  final Function onPressed;
+
+  final TextStyle? textStyle;
+  final Color? backgroundColor;
+
+  final SvgPicture icon;
+
+  static const TextStyle lightTextStyle = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w700,
+  );
+  static const TextStyle darkTextStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w700,
+  );
+
+  const LibraryAnimatedPressButton(
+      {Key? key,
+      required this.width,
+      required this.height,
+      required this.textButton,
+      required this.icon,
+      required this.onPressed,
+      this.borderRadius = 15.0,
+      this.textStyle,
+      this.backgroundColor})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        onPressed: () {
+          onPressed();
+        },
+        child: Row(
+          children: <Widget>[
+            Text(
+              textButton,
+              style: textStyle ??
+                  (Theme.of(context).brightness == Brightness.light
+                      ? lightTextStyle
+                      : darkTextStyle),
+            ),
+            const Spacer(flex: 1),
+            icon
+          ],
         ),
+        style: ButtonStyle(
+            padding: MaterialStateProperty.all(
+                const EdgeInsets.fromLTRB(25, 18, 25, 18)),
+            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (states) =>
+                    backgroundColor ?? Theme.of(context).colorScheme.secondary),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius),
+            ))),
       ),
     );
   }

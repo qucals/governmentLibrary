@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 /*
  Copyright 2022 qucals / https://github.com/qucals
 
@@ -16,11 +18,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:government_library/src/components/alert_dialog.dart';
+import 'package:government_library/src/services/validation_utils.dart';
+import 'package:loggy/loggy.dart';
+
 import 'package:government_library/src/components/press_button.dart';
 import 'package:government_library/src/components/text_button.dart';
 import 'package:government_library/src/components/text_field.dart';
 import 'package:government_library/src/theming/theme_manager.dart';
-import 'package:loggy/loggy.dart';
 
 // ignore: must_be_immutable
 class LibrarySignInPage extends StatefulWidget {
@@ -36,6 +41,19 @@ class LibrarySignInPage extends StatefulWidget {
 }
 
 class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
+  bool _validateEmail = false;
+  bool _validatePassword = false;
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData = MediaQuery.of(context);
@@ -44,7 +62,13 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
 
     loggy.debug('Screen: width=$screenWidth, height=$screenHeight');
 
-    final FocusNode focus = FocusNode();
+    FocusNode focus = FocusNode();
+
+    @override
+    void dispose() {
+      focus.dispose();
+      super.dispose();
+    }
 
     return Scaffold(
         body: Center(
@@ -102,11 +126,10 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
                 Container(
                   alignment: Alignment.center,
                   child: LibraryTextField(
+                    controller: _email,
                     hintText: 'Введите логин',
-                    autofocus: true,
-                    onSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(focus);
-                    },
+                    errorText: _validateEmail ? 'Некорретный логин' : null,
+                    onSubmitted: (_) => focus.requestFocus(),
                     labelStyle:
                         widget.themeNotifier.getTheme().textTheme.overline!,
                   ),
@@ -131,11 +154,11 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
                 Container(
                   alignment: Alignment.center,
                   child: LibraryTextField(
+                    controller: _password,
+                    errorText: _validatePassword ? 'Некорретный пароль' : null,
                     hintText: 'Введите пароль',
                     focusNode: focus,
-                    onSubmitted: (_) {
-                      FocusScope.of(context).unfocus();
-                    },
+                    onSubmitted: (_) => FocusScope.of(context).unfocus(),
                     labelStyle:
                         widget.themeNotifier.getTheme().textTheme.overline!,
                   ),
@@ -153,7 +176,48 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
                 'assets/images/icons/ic_next.svg',
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  _email.text.isEmpty || !isEmail(_email.text)
+                      ? _validateEmail = true
+                      : _validateEmail = false;
+
+                  if (!_validateEmail) {
+                    _password.text.isEmpty
+                        ? _validatePassword = true
+                        : _validatePassword = false;
+                  } else {
+                    _validatePassword = false;
+                  }
+
+                  if (!_validateEmail && !_validatePassword) {
+                    showDialog<String>(
+                      context: context, 
+                      // builder: (BuildContext context) => AlertDialog(
+                      //   title: const Text('Упс, ошибка'),
+                      //   content: const Text('Просим прощения за неудобства, но сервера Библа сейчас не работают'),
+                      //   actions: <Widget>[
+                      //     TextButton(
+                      //       onPressed: () => Navigator.pop(context, 'OK'),
+                      //       child: const Text('OK'),
+                      //     ),
+                      //   ],
+                      // ),
+                      builder:(context) => LibraryAlertDialog(
+                        height: 400,
+                        title: const Text('Упс, ошибка'),
+                        content: const Text('Просим прощения за неудобства, но сервера Библа сейчас не работают'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                });
+              },
             ),
           ),
           Container(

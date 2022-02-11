@@ -27,6 +27,7 @@ class ThemeNotifier with ChangeNotifier, UiLoggy {
     backgroundColor: const Color(0xFFE5E5E5),
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
         .copyWith(secondary: Colors.black),
+    errorColor: Colors.red,
 
     fontFamily: 'LGothamPro',
 

@@ -41,84 +41,89 @@ class _LibraryWelcomeState extends State<LibraryWelcomePage> with UiLoggy {
     double screenHeight = queryData.size.height;
 
     return Scaffold(
-      backgroundColor: widget.themeNotifier.getTheme().colorScheme.secondary,
+        backgroundColor: widget.themeNotifier.getTheme().colorScheme.secondary,
         body: Stack(
-      children: <Widget>[
-        CustomPaint(
-          painter: LibraryCurveHeaderPainter(themeNotifier: widget.themeNotifier),
-          child: Container(),
-        ),
-        Column(
-          verticalDirection: VerticalDirection.up,
           children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(32, 10, 32, screenHeight * 0.08),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LibrarySignInPage(themeNotifier: widget.themeNotifier,)));
-                },
-                child: const Text(
-                  'Уже есть аккаунт',
-                  style: TextStyle(
-                    fontFamily: 'LGothamPro',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
+            CustomPaint(
+              painter: LibraryCurveHeaderPainter(
+                  themeNotifier: widget.themeNotifier),
+              child: Container(),
+            ),
+            Column(
+              verticalDirection: VerticalDirection.up,
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.fromLTRB(32, 10, 32, screenHeight * 0.08),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LibrarySignInPage(
+                                    themeNotifier: widget.themeNotifier,
+                                  )));
+                    },
+                    child: const Text(
+                      'Уже есть аккаунт',
+                      style: TextStyle(
+                        fontFamily: 'LGothamPro',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(32, screenHeight * 0.05, 32, 10),
-              child: LibraryPressButton(
-                width: 350,
-                height: 60,
-                textButton: 'Присоединиться к Библ',
-                textStyle: LibraryPressButton.darkTextStyle,
-                backgroundColor: widget.themeNotifier.getTheme().primaryColor,
-                icon: SvgPicture.asset(
-                  'assets/images/icons/ic_next.svg',
+                Padding(
+                  padding: EdgeInsets.fromLTRB(32, screenHeight * 0.05, 32, 10),
+                  child: LibraryPressButton(
+                    width: 350,
+                    height: 60,
+                    textButton: 'Присоединиться к Библ',
+                    textStyle: LibraryPressButton.darkTextStyle,
+                    backgroundColor:
+                        widget.themeNotifier.getTheme().primaryColor,
+                    icon: SvgPicture.asset(
+                      'assets/images/icons/ic_next.svg',
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LibrarySignInPage(
+                                    themeNotifier: widget.themeNotifier,
+                                  )));
+                    },
+                  ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => 
-                            LibrarySignInPage(themeNotifier: widget.themeNotifier,)));
-                },
-              ),
-            ),
-            Container(
-                alignment: Alignment.centerLeft,
-                //  padding: const EdgeInsets.all(30),
-                padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
-                child: Text(
-                  'Читайте интересное, \nузнавайте о новых мероприятиях, \nделитесь эмоциями и впечатлениями!',
-                  style: widget.themeNotifier.getTheme().textTheme.button,
-                )),
-            Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
-                child: Text(
-                  'Современное решение \nдля любителей почитать!',
-                  style: widget.themeNotifier.getTheme().textTheme.button,
-                )),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              child: Text(
-                'Библ',
-                style: widget.themeNotifier.getTheme().textTheme.headline1,
-              ),
-            ),
+                Container(
+                    alignment: Alignment.centerLeft,
+                    //  padding: const EdgeInsets.all(30),
+                    padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
+                    child: Text(
+                      'Читайте интересное, \nузнавайте о новых мероприятиях, \nделитесь эмоциями и впечатлениями!',
+                      style: widget.themeNotifier.getTheme().textTheme.button,
+                    )),
+                Container(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
+                    child: Text(
+                      'Современное решение \nдля любителей почитать!',
+                      style: widget.themeNotifier.getTheme().textTheme.button,
+                    )),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: Text(
+                    'Библ',
+                    style: widget.themeNotifier.getTheme().textTheme.headline1,
+                  ),
+                ),
+              ],
+            )
           ],
-        )
-      ],
-    ));
+        ));
   }
 }
