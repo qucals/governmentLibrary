@@ -39,7 +39,7 @@ class LibraryTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return ElevatedButton(
       onPressed: () {
         onPressed();
       },

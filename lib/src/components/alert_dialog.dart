@@ -39,7 +39,7 @@ class LibraryAlertDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.5,
+        height: height,
         child: Column(
           children: <Widget>[
             Container(

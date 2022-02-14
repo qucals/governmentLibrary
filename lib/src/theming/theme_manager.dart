@@ -58,6 +58,13 @@ class ThemeNotifier with ChangeNotifier, UiLoggy {
         height: 1.2,
       ),
 
+      bodyText1: TextStyle(
+        color: Colors.black,
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+        height: 1.2,
+      ),
+
       button: TextStyle(
         color: Colors.white,
         fontSize: 18,

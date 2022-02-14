@@ -18,14 +18,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:government_library/src/components/alert_dialog.dart';
-import 'package:government_library/src/services/validation_utils.dart';
+import 'package:government_library/src/main_page/main_page.dart';
 import 'package:loggy/loggy.dart';
 
 import 'package:government_library/src/components/press_button.dart';
 import 'package:government_library/src/components/text_button.dart';
 import 'package:government_library/src/components/text_field.dart';
 import 'package:government_library/src/theming/theme_manager.dart';
+import 'package:government_library/src/components/alert_dialog.dart';
+import 'package:government_library/src/services/validation_utils.dart';
 
 // ignore: must_be_immutable
 class LibrarySignInPage extends StatefulWidget {
@@ -44,8 +45,8 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
-  bool _validateEmail = false;
-  bool _validatePassword = false;
+  bool _validateEmail = true;
+  bool _validatePassword = true;
 
   @override
   void dispose() {
@@ -128,7 +129,7 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
                   child: LibraryTextField(
                     controller: _email,
                     hintText: 'Введите логин',
-                    errorText: _validateEmail ? 'Некорретный логин' : null,
+                    errorText: !_validateEmail ? 'Некорретный логин' : null,
                     onSubmitted: (_) => focus.requestFocus(),
                     labelStyle:
                         widget.themeNotifier.getTheme().textTheme.overline!,
@@ -155,7 +156,7 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
                   alignment: Alignment.center,
                   child: LibraryTextField(
                     controller: _password,
-                    errorText: _validatePassword ? 'Некорретный пароль' : null,
+                    errorText: !_validatePassword ? 'Некорретный пароль' : null,
                     hintText: 'Введите пароль',
                     focusNode: focus,
                     onSubmitted: (_) => FocusScope.of(context).unfocus(),
@@ -178,44 +179,76 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
               ),
               onPressed: () {
                 setState(() {
-                  _email.text.isEmpty || !isEmail(_email.text)
+                  _email.text.isNotEmpty && isEmail(_email.text)
                       ? _validateEmail = true
                       : _validateEmail = false;
 
-                  if (!_validateEmail) {
-                    _password.text.isEmpty
+                  if (_validateEmail) {
+                    _password.text.isNotEmpty
                         ? _validatePassword = true
                         : _validatePassword = false;
                   } else {
-                    _validatePassword = false;
+                    _validatePassword = true;
                   }
 
-                  if (!_validateEmail && !_validatePassword) {
-                    showDialog<String>(
-                      context: context, 
-                      // builder: (BuildContext context) => AlertDialog(
-                      //   title: const Text('Упс, ошибка'),
-                      //   content: const Text('Просим прощения за неудобства, но сервера Библа сейчас не работают'),
-                      //   actions: <Widget>[
-                      //     TextButton(
-                      //       onPressed: () => Navigator.pop(context, 'OK'),
-                      //       child: const Text('OK'),
-                      //     ),
-                      //   ],
-                      // ),
-                      builder:(context) => LibraryAlertDialog(
-                        height: 400,
-                        title: const Text('Упс, ошибка'),
-                        content: const Text('Просим прощения за неудобства, но сервера Библа сейчас не работают'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'OK'),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
+                  if (_validateEmail && _validatePassword) {}
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LibraryMainPage(
+                              themeNotifier: widget.themeNotifier
+                          )));
+
+                  // if (_validateEmail && _validatePassword) {
+                  //   showDialog<String>(
+                  //     context: context,
+                  //     builder: (context) => LibraryAlertDialog(
+                  //       height: 200,
+                  //       title: Padding(
+                  //         padding: const EdgeInsets.all(8.0),
+                  //         child: Text(
+                  //           'Упс, ошибка',
+                  //           style: widget.themeNotifier
+                  //               .getTheme()
+                  //               .textTheme
+                  //               .headline6,
+                  //         ),
+                  //       ),
+                  //       content: Padding(
+                  //         padding: const EdgeInsets.only(left: 8, right: 8),
+                  //         child: Text(
+                  //           'Просим прощения за неудобства, но сервера Библа сейчас не работают',
+                  //           style: widget.themeNotifier
+                  //               .getTheme()
+                  //               .textTheme
+                  //               .bodyText1,
+                  //         ),
+                  //       ),
+                  //       actions: <Widget>[
+                  //         const Spacer(flex: 1),
+                  //         // TextButton(
+                  //         //   onPressed: () => Navigator.pop(context, 'OK'),
+                  //         //   child: const Text('OK'),
+                  //         // ),
+                  //         LibraryTextButton(
+                  //             onPressed: () {
+                  //               Navigator.of(context).pop();
+                  //             },
+                  //             child: Text(
+                  //               "OK",
+                  //               style: widget.themeNotifier
+                  //                   .getTheme()
+                  //                   .textTheme
+                  //                   .button,
+                  //             ),
+                  //             width: 100,
+                  //             height: 50),
+                  //         const Spacer(flex: 1),
+                  //       ],
+                  //     ),
+                  //   );
+                  // }
                 });
               },
             ),
