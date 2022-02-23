@@ -31,6 +31,8 @@ class LibraryTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final Function? onSubmitted;
 
+  final Widget? prefixIcon;
+
   LibraryTextField({
     Key? key,
     required this.hintText,
@@ -41,6 +43,7 @@ class LibraryTextField extends StatelessWidget {
     this.onSubmitted,
     this.autofocus = false,
     this.maxLength = 32,
+    this.prefixIcon,
   }) : super(key: key);
 
   @override
@@ -68,13 +71,20 @@ class LibraryTextField extends StatelessWidget {
           fillColor: const Color(0xFFE5E5EA),
           hintText: hintText,
           hintStyle: labelStyle,
-          border: errorText == null 
-            ? OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(15))
-            : OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).errorColor),
-                borderRadius: BorderRadius.circular(15)),
+          prefixIcon: prefixIcon == null
+              ? null
+              : Align(
+                  widthFactor: 1.0,
+                  heightFactor: 1.0,
+                  child: prefixIcon,
+                ),
+          border: errorText == null
+              ? OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(15))
+              : OutlineInputBorder(
+                  borderSide: BorderSide(color: Theme.of(context).errorColor),
+                  borderRadius: BorderRadius.circular(15)),
           errorText: errorText,
         ));
   }

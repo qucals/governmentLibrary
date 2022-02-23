@@ -18,12 +18,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:government_library/src/main_page/main_page.dart';
 import 'package:loggy/loggy.dart';
 
+import 'package:government_library/constants.dart';
 import 'package:government_library/src/components/press_button.dart';
 import 'package:government_library/src/components/text_button.dart';
 import 'package:government_library/src/components/text_field.dart';
+import 'package:government_library/src/main_page/main_page.dart';
+import 'package:government_library/src/services/server_functions.dart';
 import 'package:government_library/src/theming/theme_manager.dart';
 import 'package:government_library/src/components/alert_dialog.dart';
 import 'package:government_library/src/services/validation_utils.dart';
@@ -179,76 +181,88 @@ class _LibrarySignInPageState extends State<LibrarySignInPage> with UiLoggy {
               ),
               onPressed: () {
                 setState(() {
-                  _email.text.isNotEmpty && isEmail(_email.text)
-                      ? _validateEmail = true
-                      : _validateEmail = false;
+                  if (!isDebug) {
+                    _email.text.isNotEmpty && isEmail(_email.text)
+                        ? _validateEmail = true
+                        : _validateEmail = false;
 
-                  if (_validateEmail) {
-                    _password.text.isNotEmpty
-                        ? _validatePassword = true
-                        : _validatePassword = false;
-                  } else {
-                    _validatePassword = true;
+                    if (_validateEmail) {
+                      _password.text.isNotEmpty
+                          ? _validatePassword = true
+                          : _validatePassword = false;
+                    } else {
+                      _validatePassword = true;
+                    }
                   }
 
-                  if (_validateEmail && _validatePassword) {}
+                  if (!isDebug && _validateEmail && _validatePassword) {
+                    String response = authorizationRequest(
+                            {'email': _email.text, 'password': _password.text})
+                        as String;
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LibraryMainPage(
-                              themeNotifier: widget.themeNotifier
-                          )));
-
-                  // if (_validateEmail && _validatePassword) {
-                  //   showDialog<String>(
-                  //     context: context,
-                  //     builder: (context) => LibraryAlertDialog(
-                  //       height: 200,
-                  //       title: Padding(
-                  //         padding: const EdgeInsets.all(8.0),
-                  //         child: Text(
-                  //           'Упс, ошибка',
-                  //           style: widget.themeNotifier
-                  //               .getTheme()
-                  //               .textTheme
-                  //               .headline6,
-                  //         ),
-                  //       ),
-                  //       content: Padding(
-                  //         padding: const EdgeInsets.only(left: 8, right: 8),
-                  //         child: Text(
-                  //           'Просим прощения за неудобства, но сервера Библа сейчас не работают',
-                  //           style: widget.themeNotifier
-                  //               .getTheme()
-                  //               .textTheme
-                  //               .bodyText1,
-                  //         ),
-                  //       ),
-                  //       actions: <Widget>[
-                  //         const Spacer(flex: 1),
-                  //         // TextButton(
-                  //         //   onPressed: () => Navigator.pop(context, 'OK'),
-                  //         //   child: const Text('OK'),
-                  //         // ),
-                  //         LibraryTextButton(
-                  //             onPressed: () {
-                  //               Navigator.of(context).pop();
-                  //             },
-                  //             child: Text(
-                  //               "OK",
-                  //               style: widget.themeNotifier
-                  //                   .getTheme()
-                  //                   .textTheme
-                  //                   .button,
-                  //             ),
-                  //             width: 100,
-                  //             height: 50),
-                  //         const Spacer(flex: 1),
-                  //       ],
-                  //     ),
-                  //   );
-                  // }
+                    if (response == 'validate') {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LibraryMainPage(
+                                  themeNotifier: widget.themeNotifier)));
+                    } else {}
+                  } else if (isDebug) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LibraryMainPage(
+                                  themeNotifier: widget.themeNotifier)));
+                  }
+                    // if (_validateEmail && _validatePassword) {
+                    //   showDialog<String>(
+                    //     context: context,
+                    //     builder: (context) => LibraryAlertDialog(
+                    //       height: 200,
+                    //       title: Padding(
+                    //         padding: const EdgeInsets.all(8.0),
+                    //         child: Text(
+                    //           'Упс, ошибка',
+                    //           style: widget.themeNotifier
+                    //               .getTheme()
+                    //               .textTheme
+                    //               .headline6,
+                    //         ),
+                    //       ),
+                    //       content: Padding(
+                    //         padding: const EdgeInsets.only(left: 8, right: 8),
+                    //         child: Text(
+                    //           'Просим прощения за неудобства, но сервера Библа сейчас не работают',
+                    //           style: widget.themeNotifier
+                    //               .getTheme()
+                    //               .textTheme
+                    //               .bodyText1,
+                    //         ),
+                    //       ),
+                    //       actions: <Widget>[
+                    //         const Spacer(flex: 1),
+                    //         // TextButton(
+                    //         //   onPressed: () => Navigator.pop(context, 'OK'),
+                    //         //   child: const Text('OK'),
+                    //         // ),
+                    //         LibraryTextButton(
+                    //             onPressed: () {
+                    //               Navigator.of(context).pop();
+                    //             },
+                    //             child: Text(
+                    //               "OK",
+                    //               style: widget.themeNotifier
+                    //                   .getTheme()
+                    //                   .textTheme
+                    //                   .button,
+                    //             ),
+                    //             width: 100,
+                    //             height: 50),
+                    //         const Spacer(flex: 1),
+                    //       ],
+                    //     ),
+                    //   );
+                    // }
                 });
               },
             ),

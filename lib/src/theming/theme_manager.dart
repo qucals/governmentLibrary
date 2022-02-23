@@ -45,6 +45,12 @@ class ThemeNotifier with ChangeNotifier, UiLoggy {
         fontWeight: FontWeight.bold,
       ),
 
+      headline5: TextStyle(
+        color: Colors.black,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+
       headline6: TextStyle(
         color: Colors.black,
         fontSize: 18,
