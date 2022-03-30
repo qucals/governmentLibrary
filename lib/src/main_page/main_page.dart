@@ -62,7 +62,7 @@ class _LibraryMainPageState extends State<LibraryMainPage> {
     return LibraryAnimatedBottomBar(
       containerHeight: 70,
       containerCornerRadius: 20,
-      backgroundColor: widget.themeNotifier.getTheme().primaryColor,
+      // backgroundColor: widget.themeNotifier.getTheme().primaryColor,
       selectedIndex: _currentPageIndex,
       showElevation: true,
       itemCornerRadius: 20,
@@ -70,34 +70,47 @@ class _LibraryMainPageState extends State<LibraryMainPage> {
       onItemSelected: (index) => setState(() => _currentPageIndex = index),
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
-          icon: SvgPicture.asset(
+          activeIcon: SvgPicture.asset(
+            'assets/images/icons/search_icon.svg',
+            color: Colors.black,
+          ),
+          inactiveIcon: SvgPicture.asset(
             'assets/images/icons/search_icon.svg',
             color: Colors.white,
           ),
           title: Text('Главная'),
-          activeColor: Colors.white,
-          inactiveColor: Colors.black,
+          activeBackgroundColor: Colors.white,
+          inactiveBackgroundColor: Colors.black,
           textAlign: TextAlign.center,
-          selectedWidth: 105,
+          activeWidth: 110,
         ),
         BottomNavyBarItem(
-          icon: SvgPicture.asset(
+          activeIcon: SvgPicture.asset(
+            'assets/images/icons/library_icon.svg',
+            color: Colors.black,
+          ),
+          inactiveIcon: SvgPicture.asset(
             'assets/images/icons/library_icon.svg',
             color: Colors.white,
           ),
           title: Text('Библиотека'),
-          activeColor: Colors.white,
-          inactiveColor: Colors.black,
+          activeBackgroundColor: Colors.white,
+          inactiveBackgroundColor: Colors.black,
           textAlign: TextAlign.center,
+          activeWidth: 135,
         ),
         BottomNavyBarItem(
-          icon: SvgPicture.asset(
+          activeIcon: SvgPicture.asset(
+            'assets/images/icons/user_icon.svg',
+            color: Colors.black,
+          ),
+          inactiveIcon: SvgPicture.asset(
             'assets/images/icons/user_icon.svg',
             color: Colors.white,
           ),
           title: Text('Пользователь'),
-          activeColor: Colors.white,
-          inactiveColor: Colors.black,
+          activeBackgroundColor: Colors.white,
+          inactiveBackgroundColor: Colors.black,
           textAlign: TextAlign.center,
         ),
       ],
